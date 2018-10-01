@@ -1,0 +1,52 @@
+﻿<Window x:Class="AppUI.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AppUI"
+        mc:Ignorable="d"
+        Title="Лабораторная работа №3" Height="515" Width="830">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition MinWidth="600" Width="*"></ColumnDefinition>
+            <ColumnDefinition MinWidth="150" MaxWidth="250"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Column="0">
+            <Grid>
+                <DataGrid AutoGenerateColumns="False" HorizontalGridLinesBrush="DarkGray" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                          RowBackground="LightGray" AlternatingRowBackground="White" ItemsSource="{Binding Items, Mode=TwoWay}" SelectedItem="{Binding Selected}"
+                          IsReadOnly="True" SelectionMode="Single">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="ID" Binding="{Binding Path=ID}" />
+                        <DataGridTextColumn Header="ФИО" Binding="{Binding Path=Fullname}"  />
+                        <DataGridTextColumn Header="Должность" Binding="{Binding Path=Position}"  />
+                        <DataGridTextColumn Header="Зарплата" Binding="{Binding Path=Salary}"  />
+                        <DataGridTextColumn Header="Кличка кота" Binding="{Binding Path=HomeCat.Name}"  />
+                        <DataGridTextColumn Header="Порода кота" Binding="{Binding Path=HomeCat.Breed}" />
+                    </DataGrid.Columns>
+                    <DataGrid.InputBindings>
+                        <MouseBinding
+                            Gesture="LeftDoubleClick"
+                            Command="{Binding CopyCommand}"/>
+                    </DataGrid.InputBindings>
+                </DataGrid>
+            </Grid>
+        </Grid>
+        <StackPanel Grid.Column="1" Margin="10">
+            <Label Content="ФИО:"></Label>
+            <TextBox Height="23" TextWrapping="Wrap" Text="{Binding Fullname}"/>
+            <Label Content="Должность:"></Label>
+            <TextBox Height="23" TextWrapping="Wrap" Text="{Binding Position}"/>
+            <Label Content="Зарплата:"></Label>
+            <TextBox Height="23" TextWrapping="Wrap" Text="{Binding Salary}"/>
+            <Label Content="Кличка кота:"></Label>
+            <TextBox Height="23" TextWrapping="Wrap" Text="{Binding CatName}"/>
+            <Label Content="Порода кота:"></Label>
+            <TextBox Height="23" TextWrapping="Wrap" Text="{Binding CatBreed}" />
+            <Button Content="Добавить" Command="{Binding AddCommand}" Margin="10"/>
+            <Button Content="Редактировать" Command="{Binding EditCommand}" Margin="10"/>
+            <Button Content="Удалить" Command="{Binding RemoveCommand}" Margin="10"/>
+            <Button Content="Сохранить" Command="{Binding SaveDataCommand}" Margin="10"/>
+        </StackPanel>
+    </Grid>
+</Window>
